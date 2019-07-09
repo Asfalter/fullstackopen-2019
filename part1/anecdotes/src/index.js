@@ -30,14 +30,32 @@ const App = (props) => {
         setVotes(newVotes)
     }
 
-    console.log(selected)
-    console.log(votesNumber)
+    const mostVoted = () => {
+        let mostVotedNumber = 0
+        let mostVotedIndex = 0
+        votesNumber.forEach((value, index) => {
+            if (value > mostVotedNumber) {
+                mostVotedNumber = value
+                mostVotedIndex = index
+            }
+        });
+        return (
+            mostVotedIndex
+        )
+
+    }
+
+    let mostVotedIndex = mostVoted()
+
     return (
         <div>
+            <h1>Anecdote of the day</h1>
             <p>{anecdotes[selected]}</p>
             <p>Has {votesNumber[selected]} votes.</p>
             <Button action={() => UpdateAnecdote()} name={"Next anecdote"} />
             <Button action={() => UpdateVotes()} name={"Vote"} />
+            <h1>Anecdote with most votes</h1>
+            <p>{anecdotes[mostVotedIndex]}</p>
         </div>
     )
 }
